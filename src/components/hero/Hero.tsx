@@ -1,14 +1,11 @@
 import React from "react";
-import { Side } from "../types/types";
+import { Color, Side } from "../types/types";
 import { Container } from "../container/Container";
 import Cube from "../cube/Cube";
+import { createSide } from "../helpers/helpers";
 
 export default function Hero() {
-  const side: Side = [
-    [1, 1, 2],
-    [1, 3, 2],
-    [1, 1, 2],
-  ];
+  const side: Side = createSide(Color.LEPTEUH);
   return (
     <section>
       <Container>
