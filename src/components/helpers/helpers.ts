@@ -7,3 +7,14 @@ export function createSide (color: Color): Side {
         [color, color, color,],
     ]
 }
+
+
+export function createCube () {
+    const result: Side[] = [];
+    for(const color of Object.values(Color)){
+        if(typeof color === "number"){
+            result.push(createSide(color))
+        }
+    }
+    return result
+}
