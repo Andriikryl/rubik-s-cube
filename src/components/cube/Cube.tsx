@@ -1,26 +1,17 @@
 import React from "react";
-import { Side } from "../types/types";
-import style from "./style.module.css";
+import { CubeData } from "../types/types";
+import Side from "./Side";
 
 interface CubeProps {
-  side: Side;
+  cube: CubeData;
 }
 
-export default function Cube({ side }: CubeProps) {
+export default function Cube({ cube }: CubeProps) {
   return (
     <div>
-      {side.map((row, index) => {
-        return (
-          <div key={index} className={style.row}>
-            {row.map((cell, index) => (
-              <div
-                key={index}
-                className={`${style["cell-" + cell]} ${style.cell}`}
-              ></div>
-            ))}
-          </div>
-        );
-      })}
+      {cube.map((side, index) => (
+        <Side key={index} side={side}></Side>
+      ))}
     </div>
   );
 }
