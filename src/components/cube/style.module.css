@@ -1,0 +1,37 @@
+.cell {
+    width: 30px;
+    height: 30px;
+    outline: 1px solid #ffff;
+}
+
+.row{
+    display: flex;
+}
+
+.cell-0{
+    background-color: #e63946;
+}
+.cell-1{
+    background-color: #ffbe0b;
+}
+.cell-2{
+    background-color: #a7c957;
+}
+.cell-3{
+    background-color: #003566;
+}
+.cell-4{
+    background-color: #ff8fab;
+}
+.cell-5{
+    background-color: #212529;
+}
+
+/* const colors = [
+  "#e63946",
+  "#ffbe0b",
+  "#a7c957",
+  "#003566",
+  "#ff8fab",
+  "#212529",
+]; */

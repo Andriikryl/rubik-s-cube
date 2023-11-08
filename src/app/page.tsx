@@ -1,3 +1,7 @@
+import Hero from "@/components/hero/Hero";
+
 export default function Home() {
-  return <main>asdad</main>;
+  return <main>
+    <Hero/>
+  </main>;
 }
