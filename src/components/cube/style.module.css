@@ -4,18 +4,26 @@
     outline: 2px solid black;
 }
 
+.layout{
+    width: 400px;
+    border: 1px solid tomato;
+    display: grid;
+    grid-template-areas: 
+    ". s1 . ."
+    "s2 s3 s4 s5"
+    ". s0 . ."
+    ;
+}
+
 .row{
     display: flex;
 }
 
-/* export enum Colors {
-    LEPTEUH = 0,
-    YELLOW = 1,
-    BLUE = 2,
-    RED = 3,
-    GREEN = 4,
-    ORANGE  = 5,
-} */
+.side{
+    padding: 5px;
+}
+
+
 
 .cell-0{
     background-color: #ffff ;

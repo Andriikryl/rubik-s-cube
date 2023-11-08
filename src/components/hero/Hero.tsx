@@ -1,14 +1,11 @@
 import React from "react";
-import { Color, CubeSide, ShiftOperation } from "../types/types";
+import { ShiftOperation } from "../types/types";
 import { Container } from "../container/Container";
-import { createCube, createSide, shift } from "../helpers/helpers";
-import Side from "../cube/Side";
+import { createCube, shift } from "../helpers/helpers";
 import Cube from "../cube/Cube";
 import style from "./style.module.css";
 
 export default function Hero() {
-  // const side: CubeSide = createSide(Color.BLUE);
-
   const cube = createCube();
   const cycel = [2, 3, 4, 5] as const;
 

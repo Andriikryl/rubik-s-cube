@@ -8,7 +8,7 @@ interface SideProps {
 
 export default function Side({ side }: SideProps) {
   return (
-    <div>
+    <div className={style.side}>
       {side.map((row, index) => {
         return (
           <div key={index} className={style.row}>
