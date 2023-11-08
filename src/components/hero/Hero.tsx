@@ -10,10 +10,10 @@ export default function Hero() {
   // const side: CubeSide = createSide(Color.BLUE);
 
   const cube = createCube();
-  const cycel = [0, 1, 2, 3] as const;
+  const cycel = [2, 3, 4, 5] as const;
 
   const operation: ShiftOperation = [
-    [-1, -1, -1],
+    [1, 1, 1],
     [0, 0, 0],
     [0, 0, 0],
   ];
