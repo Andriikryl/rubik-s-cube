@@ -33,3 +33,23 @@ export function shift (cube:CubeData, cycle:Cycle, operation:ShiftOperation):Cub
         }
     }) as CubeData
 }
+
+
+
+  export const rotate90 = (side:CubeSide):CubeSide => {
+        return side.map((row, i) =>
+            row.map((val, j) => side[side.length - 1 - j][i])
+        ) as CubeSide;
+}
+
+export const rotate270 = (side:CubeSide):CubeSide => {
+    return rotate90(rotate90(rotate90(side)))
+}
+export const rotate180 = (side:CubeSide):CubeSide => {
+    return rotate90(rotate90(rotate90(side)))
+}
+
+
+const reversRotateMap ={
+    
+}

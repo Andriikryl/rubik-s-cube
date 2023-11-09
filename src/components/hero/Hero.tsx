@@ -9,6 +9,7 @@ import style from "./style.module.css";
 interface UpdateAction {
   operation: ShiftOperation;
   cycle: Cycle;
+  shift: typeof shift;
 }
 
 export default function Hero() {
@@ -35,6 +36,7 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
+      shift,
     },
     US: {
       operation: [
@@ -43,6 +45,7 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
+      shift,
     },
     DS: {
       operation: [
@@ -51,6 +54,7 @@ export default function Hero() {
         [1, 1, 1],
       ],
       cycle: cycels.X,
+      shift,
     },
     D: {
       operation: [
@@ -59,6 +63,7 @@ export default function Hero() {
         [-1, -1, -1],
       ],
       cycle: cycels.X,
+      shift,
     },
 
     //////////////////////////////////////////////////////////
@@ -70,6 +75,7 @@ export default function Hero() {
         [-1, 0, 0],
       ],
       cycle: cycels.Y,
+      shift,
     },
     LS: {
       operation: [
@@ -78,6 +84,7 @@ export default function Hero() {
         [1, 0, 0],
       ],
       cycle: cycels.Y,
+      shift,
     },
     RS: {
       operation: [
@@ -86,6 +93,7 @@ export default function Hero() {
         [0, 0, -1],
       ],
       cycle: cycels.Y,
+      shift,
     },
     R: {
       operation: [
@@ -94,6 +102,46 @@ export default function Hero() {
         [0, 0, 1],
       ],
       cycle: cycels.Y,
+      shift,
+    },
+
+    ///////////////////////////////////////////////
+
+    F: {
+      operation: [
+        [1, 1, 1],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      cycle: cycels.Z,
+      shift,
+    },
+    FS: {
+      operation: [
+        [1, 1, 1],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      cycle: cycels.Z,
+      shift,
+    },
+    BS: {
+      operation: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [1, 1, 1],
+      ],
+      cycle: cycels.Z,
+      shift,
+    },
+    B: {
+      operation: [
+        [0, 0, 1],
+        [0, 0, 1],
+        [0, 0, 1],
+      ],
+      cycle: cycels.Z,
+      shift,
     },
   };
 
