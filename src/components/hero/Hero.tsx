@@ -22,7 +22,9 @@ export default function Hero() {
   // const cycel = [2, 3, 4, 5] as const;
 
   const cycels = {
-    HORIZONTAL: [2, 3, 4, 5],
+    X: [2, 3, 4, 5],
+    Y: [1, 3, 0, 5],
+    Z: [2, 1, 4, 0],
   } as const;
 
   const operations: Record<string, UpdateAction> = {
@@ -32,7 +34,7 @@ export default function Hero() {
         [0, 0, 0],
         [0, 0, 0],
       ],
-      cycle: cycels.HORIZONTAL,
+      cycle: cycels.X,
     },
     US: {
       operation: [
@@ -40,7 +42,7 @@ export default function Hero() {
         [0, 0, 0],
         [0, 0, 0],
       ],
-      cycle: cycels.HORIZONTAL,
+      cycle: cycels.X,
     },
     DS: {
       operation: [
@@ -48,7 +50,7 @@ export default function Hero() {
         [0, 0, 0],
         [1, 1, 1],
       ],
-      cycle: cycels.HORIZONTAL,
+      cycle: cycels.X,
     },
     D: {
       operation: [
@@ -56,7 +58,42 @@ export default function Hero() {
         [0, 0, 0],
         [-1, -1, -1],
       ],
-      cycle: cycels.HORIZONTAL,
+      cycle: cycels.X,
+    },
+
+    //////////////////////////////////////////////////////////
+
+    L: {
+      operation: [
+        [-1, 0, 0],
+        [-1, 0, 0],
+        [-1, 0, 0],
+      ],
+      cycle: cycels.Y,
+    },
+    LS: {
+      operation: [
+        [1, 0, 0],
+        [1, 0, 0],
+        [1, 0, 0],
+      ],
+      cycle: cycels.Y,
+    },
+    RS: {
+      operation: [
+        [0, 0, -1],
+        [0, 0, -1],
+        [0, 0, -1],
+      ],
+      cycle: cycels.Y,
+    },
+    R: {
+      operation: [
+        [0, 0, 1],
+        [0, 0, 1],
+        [0, 0, 1],
+      ],
+      cycle: cycels.Y,
     },
   };
 
