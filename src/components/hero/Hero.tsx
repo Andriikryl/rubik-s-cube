@@ -21,16 +21,27 @@ export default function Hero() {
 
   // const cycel = [2, 3, 4, 5] as const;
 
-  const cycels: Record<string, Cycle> = {
+  const cycels = {
     HORIZONTAL: [2, 3, 4, 5],
-  };
+  } as const;
 
-  const operations: Record<string, ShiftOperation> = {
-    U1: [
-      [1, 1, 1],
-      [0, 0, 0],
-      [0, 0, 0],
-    ],
+  const operations: Record<string, UpdateAction> = {
+    U: {
+      operation: [
+        [1, 1, 1],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      cycle: cycels.HORIZONTAL,
+    },
+    DS: {
+      operation: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [1, 1, 1],
+      ],
+      cycle: cycels.HORIZONTAL,
+    },
   };
 
   // const cube2 = shift(cube, cycel, operation);
@@ -41,13 +52,15 @@ export default function Hero() {
         <div className={style.flex__group}>
           <Cube cube={cube} />
         </div>
-        <button
-          onClick={() =>
-            dispatch({ operation: operations.U1, cycle: cycels.HORIZONTAL })
-          }
-        >
-          left
-        </button>
+        <div>
+          {Object.entries(operations).map(([name, action], index) => {
+            return (
+              <button key={index} onClick={() => dispatch(action)}>
+                {name}
+              </button>
+            );
+          })}
+        </div>
       </Container>
     </section>
   );
