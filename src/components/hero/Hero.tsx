@@ -34,11 +34,27 @@ export default function Hero() {
       ],
       cycle: cycels.HORIZONTAL,
     },
+    US: {
+      operation: [
+        [-1, -1, -1],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      cycle: cycels.HORIZONTAL,
+    },
     DS: {
       operation: [
         [0, 0, 0],
         [0, 0, 0],
         [1, 1, 1],
+      ],
+      cycle: cycels.HORIZONTAL,
+    },
+    D: {
+      operation: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [-1, -1, -1],
       ],
       cycle: cycels.HORIZONTAL,
     },
