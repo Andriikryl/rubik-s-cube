@@ -1,4 +1,4 @@
-import { Color, CubeData, CubeSide, Cycle, ShiftOperation } from "../types/types";
+import { Color, CubeData, CubeSide, Cycle, RotateFn, RotateMatrix, ShiftOperation } from "../types/types";
 
 export function createSide (color: Color): CubeSide {
     return [
@@ -46,10 +46,31 @@ export const rotate270 = (side:CubeSide):CubeSide => {
     return rotate90(rotate90(rotate90(side)))
 }
 export const rotate180 = (side:CubeSide):CubeSide => {
-    return rotate90(rotate90(rotate90(side)))
+    return rotate90(rotate90(side))
+}
+export const rotate0 = (side:CubeSide):CubeSide => {
+    return side
 }
 
 
-const reversRotateMap ={
-    
+const reversRotateMap = new Map<RotateFn, RotateFn>();
+reversRotateMap.set(rotate270, rotate90);
+reversRotateMap.set(rotate180, rotate180);
+reversRotateMap.set(rotate90, rotate270);
+reversRotateMap.set(rotate0, rotate0);
+
+
+export function rotateCube(cube:CubeData, cycle:Cycle, matrix: RotateMatrix):CubeData{
+    return cube.map((side, i) => {
+        const index = cycle.indexOf(i)
+        if(index === -1){
+            return side
+        } else {
+            return matrix[index](side)
+        }
+    }) as CubeData
+}
+
+export function reveersRotateMatrix(matrix:RotateMatrix){
+    return matrix.map(r => reversRotateMap.get(r) as RotateFn) as unknown as RotateMatrix
 }

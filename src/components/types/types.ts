@@ -33,3 +33,6 @@ export type ShiftOperation = readonly [
     readonly  [operations, operations,operations,],
     readonly  [operations, operations,operations,],
 ]
+
+export type RotateFn = (s:CubeSide) => CubeSide;
+export type RotateMatrix = readonly [RotateFn, RotateFn, RotateFn, RotateFn] 

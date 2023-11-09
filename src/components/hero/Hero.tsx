@@ -1,21 +1,30 @@
 "use client";
 import React, { useReducer } from "react";
-import { CubeData, Cycle, ShiftOperation } from "../types/types";
+import { CubeData, Cycle, RotateMatrix, ShiftOperation } from "../types/types";
 import { Container } from "../container/Container";
-import { createCube, shift } from "../helpers/helpers";
+import {
+  rotateCube,
+  createCube,
+  rotate0,
+  shift,
+  reveersRotateMatrix,
+} from "../helpers/helpers";
 import Cube from "../cube/Cube";
 import style from "./style.module.css";
 
 interface UpdateAction {
   operation: ShiftOperation;
   cycle: Cycle;
-  shift: typeof shift;
+  rotate?: RotateMatrix;
 }
 
 export default function Hero() {
   const [cube, dispatch] = useReducer(
-    (cube: CubeData, { operation, cycle }: UpdateAction) => {
-      return shift(cube, cycle, operation);
+    (cube: CubeData, { operation, cycle, rotate }: UpdateAction) => {
+      rotate = rotate || [rotate0, rotate0, rotate0, rotate0];
+      const rotatedCube = rotateCube(cube, cycle, rotate);
+      let shiftedCube = shift(rotatedCube, cycle, operation);
+      return rotateCube(shiftedCube, cycle, reveersRotateMatrix(rotate));
     },
     createCube()
   );
@@ -36,7 +45,6 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
-      shift,
     },
     US: {
       operation: [
@@ -45,7 +53,6 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
-      shift,
     },
     DS: {
       operation: [
@@ -54,7 +61,6 @@ export default function Hero() {
         [1, 1, 1],
       ],
       cycle: cycels.X,
-      shift,
     },
     D: {
       operation: [
@@ -63,7 +69,6 @@ export default function Hero() {
         [-1, -1, -1],
       ],
       cycle: cycels.X,
-      shift,
     },
 
     //////////////////////////////////////////////////////////
@@ -75,7 +80,6 @@ export default function Hero() {
         [-1, 0, 0],
       ],
       cycle: cycels.Y,
-      shift,
     },
     LS: {
       operation: [
@@ -84,7 +88,6 @@ export default function Hero() {
         [1, 0, 0],
       ],
       cycle: cycels.Y,
-      shift,
     },
     RS: {
       operation: [
@@ -93,7 +96,6 @@ export default function Hero() {
         [0, 0, -1],
       ],
       cycle: cycels.Y,
-      shift,
     },
     R: {
       operation: [
@@ -102,7 +104,6 @@ export default function Hero() {
         [0, 0, 1],
       ],
       cycle: cycels.Y,
-      shift,
     },
 
     ///////////////////////////////////////////////
@@ -114,7 +115,6 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.Z,
-      shift,
     },
     FS: {
       operation: [
@@ -123,7 +123,6 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.Z,
-      shift,
     },
     BS: {
       operation: [
@@ -132,7 +131,6 @@ export default function Hero() {
         [1, 1, 1],
       ],
       cycle: cycels.Z,
-      shift,
     },
     B: {
       operation: [
@@ -141,7 +139,6 @@ export default function Hero() {
         [0, 0, 1],
       ],
       cycle: cycels.Z,
-      shift,
     },
   };
 
