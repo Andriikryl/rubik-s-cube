@@ -21,7 +21,18 @@
 .row{
     display: flex;
 }
+/* 
+.side-0{
+    transform: rotate(90deg);
+}
 
+.side-1{
+    transform: rotate(270deg);
+}
+
+.side-2{
+    transform: scaleX(-1)
+} */
 
 
 

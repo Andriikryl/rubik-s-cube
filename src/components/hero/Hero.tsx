@@ -8,6 +8,9 @@ import {
   rotate0,
   shift,
   reveersRotateMatrix,
+  rotate180,
+  rotate270,
+  rotate90,
 } from "../helpers/helpers";
 import Cube from "../cube/Cube";
 import style from "./style.module.css";
@@ -15,16 +18,16 @@ import style from "./style.module.css";
 interface UpdateAction {
   operation: ShiftOperation;
   cycle: Cycle;
-  rotate?: RotateMatrix;
+  rotateMatrix?: RotateMatrix;
 }
 
 export default function Hero() {
   const [cube, dispatch] = useReducer(
-    (cube: CubeData, { operation, cycle, rotate }: UpdateAction) => {
-      rotate = rotate || [rotate0, rotate0, rotate0, rotate0];
-      const rotatedCube = rotateCube(cube, cycle, rotate);
+    (cube: CubeData, { operation, cycle, rotateMatrix }: UpdateAction) => {
+      rotateMatrix = rotateMatrix || [rotate0, rotate0, rotate0, rotate0];
+      const rotatedCube = rotateCube(cube, cycle, rotateMatrix);
       let shiftedCube = shift(rotatedCube, cycle, operation);
-      return rotateCube(shiftedCube, cycle, reveersRotateMatrix(rotate));
+      return rotateCube(shiftedCube, cycle, reveersRotateMatrix(rotateMatrix));
     },
     createCube()
   );
@@ -37,6 +40,8 @@ export default function Hero() {
     Z: [2, 1, 4, 0],
   } as const;
 
+  const sideRotateMatrix = [rotate270, rotate180, rotate90, rotate0] as const;
+  const LRRotateMatrix = [rotate0, rotate0, rotate0, rotate180] as const;
   const operations: Record<string, UpdateAction> = {
     U: {
       operation: [
@@ -80,6 +85,7 @@ export default function Hero() {
         [-1, 0, 0],
       ],
       cycle: cycels.Y,
+      rotateMatrix: LRRotateMatrix,
     },
     LS: {
       operation: [
@@ -88,6 +94,7 @@ export default function Hero() {
         [1, 0, 0],
       ],
       cycle: cycels.Y,
+      rotateMatrix: LRRotateMatrix,
     },
     RS: {
       operation: [
@@ -96,6 +103,7 @@ export default function Hero() {
         [0, 0, -1],
       ],
       cycle: cycels.Y,
+      rotateMatrix: LRRotateMatrix,
     },
     R: {
       operation: [
@@ -104,17 +112,19 @@ export default function Hero() {
         [0, 0, 1],
       ],
       cycle: cycels.Y,
+      rotateMatrix: LRRotateMatrix,
     },
 
     ///////////////////////////////////////////////
 
     F: {
       operation: [
-        [1, 1, 1],
+        [-1, -1, -1],
         [0, 0, 0],
         [0, 0, 0],
       ],
       cycle: cycels.Z,
+      rotateMatrix: sideRotateMatrix,
     },
     FS: {
       operation: [
@@ -123,22 +133,25 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.Z,
+      rotateMatrix: sideRotateMatrix,
     },
     BS: {
+      operation: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [-1, -1, -1],
+      ],
+      cycle: cycels.Z,
+      rotateMatrix: sideRotateMatrix,
+    },
+    B: {
       operation: [
         [0, 0, 0],
         [0, 0, 0],
         [1, 1, 1],
       ],
       cycle: cycels.Z,
-    },
-    B: {
-      operation: [
-        [0, 0, 1],
-        [0, 0, 1],
-        [0, 0, 1],
-      ],
-      cycle: cycels.Z,
+      rotateMatrix: sideRotateMatrix,
     },
   };
 

@@ -15,8 +15,10 @@ export default function Side({ side }: SideProps) {
             {row.map((cell, index) => (
               <div
                 key={index}
-                className={`${style["cell-" + cell]} ${style.cell}`}
-              ></div>
+                className={`${style["cell-" + cell.color]} ${style.cell}`}
+              >
+                {cell.id}
+              </div>
             ))}
           </div>
         );

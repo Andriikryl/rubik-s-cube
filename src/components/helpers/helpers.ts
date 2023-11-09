@@ -1,19 +1,27 @@
-import { Color, CubeData, CubeSide, Cycle, RotateFn, RotateMatrix, ShiftOperation } from "../types/types";
+import { Cell, Color, CubeData, CubeRow, CubeSide, Cycle, RotateFn, RotateMatrix, ShiftOperation } from "../types/types";
 
-export function createSide (color: Color): CubeSide {
-    return [
-        [color, color, color,],
-        [color, color, color,],
-        [color, color, color,],
-    ]
+export function createSide (color: Color, startIndex: number): CubeSide {
+    const result: Partial<CubeRow[]> = []
+    for(let i =0; i < 3; i++){
+        const row: Cell[] = []
+        for(let j = 0; j < 3; j++){
+            row.push({
+                color: color,
+                id: (startIndex++).toString()
+            })
+        }
+        result.push(row as unknown as CubeRow)
+    }
+    return result as unknown as CubeSide
 }
 
 
 export function createCube ():CubeData {
     const result: CubeSide[] = [];
+    let i = 0;
     for(const color of Object.values(Color)){
         if(typeof color === "number"){
-            result.push(createSide(color))
+            result.push(createSide(color, (i++) * 9))
         }
     }
     return result as CubeData
@@ -38,8 +46,8 @@ export function shift (cube:CubeData, cycle:Cycle, operation:ShiftOperation):Cub
 
   export const rotate90 = (side:CubeSide):CubeSide => {
         return side.map((row, i) =>
-            row.map((val, j) => side[side.length - 1 - j][i])
-        ) as CubeSide;
+            row.map((val, j) => side[side.length - 1 - j][i]) 
+        ) as unknown as CubeSide;
 }
 
 export const rotate270 = (side:CubeSide):CubeSide => {
