@@ -18,7 +18,9 @@ export default function Cube({ cube, lastAction }: CubeProps) {
             return (
               (o &&
                 lastAction?.cycle.includes(index) &&
-                (o === -1 ? "right" : "left")) ||
+                (o === -1
+                  ? lastAction.animations[1]
+                  : lastAction.animations[0])) ||
               undefined
             );
           });

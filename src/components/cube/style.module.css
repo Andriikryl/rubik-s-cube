@@ -79,6 +79,33 @@
     animation-name: shiftRight;
 }
 
+.animate-bottom{
+    animation-duration: 1s;
+    animation-name: shiftBottom;
+}
+
+@keyframes shiftBottom {
+    from{
+        transform: translateY(-100px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+.animate-top{
+    animation-duration: 1s;
+    animation-name: shiftTop;
+}
+
+@keyframes shiftTop {
+    from{
+        transform: translateY(100px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
 @keyframes shiftLeft {
     from{
         transform: translateX(100px);
