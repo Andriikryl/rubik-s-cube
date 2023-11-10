@@ -1,6 +1,6 @@
 "use client";
-import React, { useReducer } from "react";
-import { CubeData, Cycle, RotateMatrix, ShiftOperation } from "../types/types";
+import React, { useReducer, useState } from "react";
+import { CubeData, UpdateAction } from "../types/types";
 import { Container } from "../container/Container";
 import {
   rotateCube,
@@ -15,13 +15,8 @@ import {
 import Cube from "../cube/Cube";
 import style from "./style.module.css";
 
-interface UpdateAction {
-  operation: ShiftOperation;
-  cycle: Cycle;
-  rotateMatrix?: RotateMatrix;
-}
-
 export default function Hero() {
+  const [lastAction, setLastAction] = useState<UpdateAction>();
   const [cube, dispatch] = useReducer(
     (cube: CubeData, { operation, cycle, rotateMatrix }: UpdateAction) => {
       rotateMatrix = rotateMatrix || [rotate0, rotate0, rotate0, rotate0];
@@ -50,6 +45,7 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
+      animations: ["left", "right"],
     },
     US: {
       operation: [
@@ -58,6 +54,7 @@ export default function Hero() {
         [0, 0, 0],
       ],
       cycle: cycels.X,
+      animations: ["left", "right"],
     },
     DS: {
       operation: [
@@ -66,6 +63,7 @@ export default function Hero() {
         [1, 1, 1],
       ],
       cycle: cycels.X,
+      animations: ["left", "right"],
     },
     D: {
       operation: [
@@ -74,6 +72,7 @@ export default function Hero() {
         [-1, -1, -1],
       ],
       cycle: cycels.X,
+      animations: ["left", "right"],
     },
 
     //////////////////////////////////////////////////////////
@@ -86,6 +85,7 @@ export default function Hero() {
       ],
       cycle: cycels.Y,
       rotateMatrix: LRRotateMatrix,
+      animations: ["left", "right"],
     },
     LS: {
       operation: [
@@ -95,6 +95,7 @@ export default function Hero() {
       ],
       cycle: cycels.Y,
       rotateMatrix: LRRotateMatrix,
+      animations: ["left", "right"],
     },
     RS: {
       operation: [
@@ -104,6 +105,7 @@ export default function Hero() {
       ],
       cycle: cycels.Y,
       rotateMatrix: LRRotateMatrix,
+      animations: ["left", "right"],
     },
     R: {
       operation: [
@@ -113,6 +115,7 @@ export default function Hero() {
       ],
       cycle: cycels.Y,
       rotateMatrix: LRRotateMatrix,
+      animations: ["left", "right"],
     },
 
     ///////////////////////////////////////////////
@@ -125,6 +128,7 @@ export default function Hero() {
       ],
       cycle: cycels.Z,
       rotateMatrix: sideRotateMatrix,
+      animations: ["left", "right"],
     },
     FS: {
       operation: [
@@ -134,6 +138,7 @@ export default function Hero() {
       ],
       cycle: cycels.Z,
       rotateMatrix: sideRotateMatrix,
+      animations: ["left", "right"],
     },
     BS: {
       operation: [
@@ -143,6 +148,7 @@ export default function Hero() {
       ],
       cycle: cycels.Z,
       rotateMatrix: sideRotateMatrix,
+      animations: ["left", "right"],
     },
     B: {
       operation: [
@@ -152,21 +158,25 @@ export default function Hero() {
       ],
       cycle: cycels.Z,
       rotateMatrix: sideRotateMatrix,
+      animations: ["left", "right"],
     },
   };
 
   // const cube2 = shift(cube, cycel, operation);
-
+  let handelAction = (action: UpdateAction) => {
+    dispatch(action);
+    setLastAction(action);
+  };
   return (
     <section>
       <Container>
         <div className={style.flex__group}>
-          <Cube cube={cube} />
+          <Cube cube={cube} lastAction={lastAction} />
         </div>
         <div>
           {Object.entries(operations).map(([name, action], index) => {
             return (
-              <button key={index} onClick={() => dispatch(action)}>
+              <button key={index} onClick={() => handelAction(action)}>
                 {name}
               </button>
             );

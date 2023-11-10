@@ -1,7 +1,11 @@
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     outline: 2px solid black;
+    display: grid;
+    place-items: center;
+    color: #0d1321;
+    font-size: 20px;
 }
 
 .layout{
@@ -64,3 +68,30 @@
   "#ff8fab",
   "#212529",
 ]; */
+
+
+.animate-left{
+    animation-duration: 1s;
+    animation-name: shiftLeft;
+}
+.animate-right{
+    animation-duration: 1s;
+    animation-name: shiftRight;
+}
+
+@keyframes shiftLeft {
+    from{
+        transform: translateX(100px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}
+@keyframes shiftRight {
+    from{
+        transform: translateX(-100px);
+    }
+    to{
+        transform: translateX(0);
+    }
+}

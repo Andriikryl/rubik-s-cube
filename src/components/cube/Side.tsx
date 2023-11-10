@@ -1,21 +1,27 @@
-import React from "react";
-import { CubeSide } from "../types/types";
+"use client";
+import React, { useState } from "react";
+import { AnimationDiraction, CubeSide } from "../types/types";
 import style from "./style.module.css";
 
 interface SideProps {
   side: CubeSide;
+  animationDiraction?: AnimationDiraction;
 }
 
-export default function Side({ side }: SideProps) {
+export default function Side({ side, animationDiraction }: SideProps) {
+  const [animation, setAnimation] = useState("");
   return (
     <div className={style.side}>
-      {side.map((row, index) => {
+      {side.map((row, indexY) => {
         return (
-          <div key={index} className={style.row}>
-            {row.map((cell, index) => (
+          <div key={indexY} className={style.row}>
+            {row.map((cell, indexX) => (
               <div
-                key={index}
-                className={`${style["cell-" + cell.color]} ${style.cell}`}
+                onClick={() => setAnimation("left")}
+                key={cell.id}
+                className={`${style["cell-" + cell.color]} ${style.cell} ${
+                  style["animate-" + animationDiraction?.[indexY]?.[indexX]]
+                } `}
               >
                 {cell.id}
               </div>
