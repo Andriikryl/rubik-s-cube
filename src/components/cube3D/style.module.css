@@ -1,0 +1,36 @@
+.side{
+    width: 100px;
+    height: 100px;
+    border:  1px solid tomato;
+}
+
+.cell{
+    display: grid;
+}
+
+.cell *{
+    grid-area: 1/1/-1/-1;
+}
+
+.left{
+    transform: translate3d(0,0,0);
+}
+.right{
+    transform: translate3d(0,0,0)
+}
+.bottom{
+    transform: translate3d(0,0,0)
+}
+.top{
+    transform: translate3d(0,0,0)
+}
+.front{
+    transform: translate3d(0,0,0)
+}
+.back{
+    transform: translate3d(0,0,0)
+}
+
+.wrapper{
+    display: flex;
+}

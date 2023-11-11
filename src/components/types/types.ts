@@ -49,7 +49,7 @@ export type RotateMatrix = readonly [RotateFn, RotateFn, RotateFn, RotateFn]
 export type AnimationDiract = "left" | "top" | "right" | "bottom" | undefined;
 export type AnimationDiraction = AnimationDiract[][];
 
-export interface UpdateAction {
+export interface UpdateAction{
     operation: ShiftOperation;
     cycle: Cycle;
     rotateMatrix?: RotateMatrix;

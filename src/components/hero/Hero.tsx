@@ -12,6 +12,7 @@ import {
 import Cube from "../cube/Cube";
 import style from "./style.module.css";
 import { operations } from "../operations/operations";
+import Cube3D from "../cube3D/Cube3D";
 
 export default function Hero() {
   const [lastAction, setLastAction] = useState<UpdateAction>();
@@ -25,9 +26,6 @@ export default function Hero() {
     createCube()
   );
 
-  // const cycel = [2, 3, 4, 5] as const;
-
-  // const cube2 = shift(cube, cycel, operation);
   let handelAction = (action: UpdateAction) => {
     dispatch(action);
     setLastAction(action);
@@ -35,7 +33,10 @@ export default function Hero() {
   return (
     <section>
       <Container>
-        <div className={style.flex__group}>
+        <div>
+          <Cube3D />
+        </div>
+        {/* <div className={style.flex__group}>
           <Cube cube={cube} lastAction={lastAction} />
         </div>
         <div>
@@ -46,7 +47,7 @@ export default function Hero() {
               </button>
             );
           })}
-        </div>
+        </div> */}
       </Container>
     </section>
   );
