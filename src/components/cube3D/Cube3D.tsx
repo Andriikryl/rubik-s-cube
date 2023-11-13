@@ -2,38 +2,25 @@ import React from "react";
 import styles from "./style.module.css";
 import clsx from "clsx";
 
-interface Cell {
-  id: string;
-  x: number;
-  y: number;
-  z: number;
+interface RotateTabel {
   rotateX: number;
   rotateY: number;
   rotateZ: number;
 }
 
-export default function Cube3D() {
-  const cells: Cell[] = [
-    {
-      id: "1",
-      x: 0,
-      y: 0,
-      z: 0,
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0,
-    },
-    {
-      id: "2",
-      x: 1,
-      y: 0,
-      z: 0,
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0,
-    },
-  ];
+export interface Cell3D extends RotateTabel {
+  id: string;
+  x: number;
+  y: number;
+  z: number;
+}
 
+interface Cube3DProps {
+  cells: Cell3D[];
+  rotate: RotateTabel;
+}
+
+export default function Cube3D({ rotate, cells }: Cube3DProps) {
   const elements = [
     { name: "left", color: "#ffff" },
     { name: "right", color: "#ffee80" },
@@ -45,20 +32,50 @@ export default function Cube3D() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.cube}>
+      <div
+        className={styles.cube}
+        style={{
+          transform: `
+                perspective(1500px)
+                rotateX(${rotate.rotateX}deg)
+                rotateY(${rotate.rotateY}deg)
+                rotateZ(${rotate.rotateZ}deg)
+                `,
+        }}
+      >
         {cells.map((cell) => {
           return (
-            <div key={cell.id} className={styles.cell}>
-              {elements.map((element, index) => {
-                const style = { backgroundColor: element.color };
-                return (
-                  <div
-                    className={clsx(styles.side, `styles.${element.name}`)}
-                    key={index}
-                    style={style}
-                  ></div>
-                );
-              })}
+            <div
+              key={cell.id}
+              className={styles.cell__wrapper}
+              style={{
+                transform: `
+            rotateX(${cell.rotateX}deg)
+            rotateY(${cell.rotateY}deg)
+            rotateZ(${cell.rotateZ}deg)
+            `,
+              }}
+            >
+              <div
+                className={styles.cell}
+                style={{
+                  transform: `
+                translate3d(calc(var(--cell-size) * ${cell.x}), calc(var(--cell-size) * ${cell.y}), calc(var(--cell-size) * ${cell.z}))
+                `,
+                }}
+              >
+                {elements.map((element, index) => {
+                  return (
+                    <div
+                      className={clsx(styles.side, styles[`${element.name}`])}
+                      key={index}
+                      style={{ backgroundColor: element.color }}
+                    >
+                      {cell.x}:{cell.y}:{cell.z}#${cell.id}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}
