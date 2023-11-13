@@ -13,6 +13,9 @@ export interface Cell3D extends RotateTabel {
   x: number;
   y: number;
   z: number;
+  initialX: number;
+  initialY: number;
+  initialZ: number;
 }
 
 interface Cube3DProps {
@@ -37,8 +40,8 @@ export default function Cube3D({ rotate, cells }: Cube3DProps) {
         style={{
           transform: `
                 perspective(1500px)
-                rotateX(${rotate.rotateX}deg)
                 rotateY(${rotate.rotateY}deg)
+                rotateX(${rotate.rotateX}deg)
                 rotateZ(${rotate.rotateZ}deg)
                 `,
         }}
@@ -57,10 +60,18 @@ export default function Cube3D({ rotate, cells }: Cube3DProps) {
               }}
             >
               <div
+                key={cell.id}
                 className={styles.cell}
                 style={{
                   transform: `
-                translate3d(calc(var(--cell-size) * ${cell.x}), calc(var(--cell-size) * ${cell.y}), calc(var(--cell-size) * ${cell.z}))
+                  rotateX(${cell.rotateX}deg)
+                  rotateY(${cell.rotateY}deg)
+                  rotateZ(${cell.rotateZ}deg)
+                translate3d(calc(var(--cell-size) * ${
+                  cell.initialX - 1
+                }), calc(var(--cell-size) * ${
+                    cell.initialY - 1
+                  }), calc(var(--cell-size) * ${cell.initialZ - 1}))
                 `,
                 }}
               >

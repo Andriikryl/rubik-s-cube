@@ -6,34 +6,53 @@
     --cell-size: 100px;
     --half-cell: calc(var(--cell-size)/2);
 }
-.side{
-    width: var(--cell-size);
-    height: var(--cell-size);
-    border:  1px solid #000;
-}
 
 .cube{
     transform-style: preserve-3d;
-     display: grid;
-}
-
-.cell{
-    display: grid;
-    transform-style: preserve-3d;
-    grid-area: 1/1/1/1;
-    transition: all 500ms ease-in-out;
+     /* display: grid; */
+     position: relative;
 }
 
 .side {
-    grid-area: 1/1/1/1;
     transform-style: preserve-3d;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border:  1px solid #000;
+    /* grid-area: 1/1/1/1; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     opacity: 0.8;
 }
 
 .cell__wrapper{
-    grid-area: 1/1/1/1;
+    /* grid-area: 1/1/1/1; */
+    width: var(--cell-size);
+    height: var(--cell-size);
+    transform-origin: center center calc(-1 * var(--half-cell));
     transform-style: preserve-3d;
+    transition: all 500ms ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid red;
 }
+
+.cell{
+    /* display: grid; */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 500ms ease-in-out;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    /* grid-area: 1/1/1/1; */
+}
+
+
 
 .left{
     transform: rotateY(90deg) translate3d(var(--half-cell) ,0px, calc(-1 * var(--half-cell)));
